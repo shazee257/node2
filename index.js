@@ -1,16 +1,22 @@
-const app = require('express')();
+const express = require('express');
 const cors = require('cors');
 
-app.use(cors());
+const app = express();
 
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.get('/', (req, res) => {
-    res.send('Response from the Second Server');
+    res.send({
+        message: 'Response from the Second Server'
+    });
 });
 
+const PORT = process.env.PORT || 5001;
 
-app.listen(5001, () => {
-    console.log('Second Server - Listening on port 5001');
+app.listen(PORT, () => {
+    console.log('Second Server - Listening on port', PORT);
 });
 
 
